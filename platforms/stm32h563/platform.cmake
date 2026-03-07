@@ -6,11 +6,9 @@ set(CPU_FLAGS -mcpu=cortex-m33 -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=hard)
 add_compile_options(${CPU_FLAGS} -fdata-sections -ffunction-sections)
 
 string(TOLOWER "${STM32_DEVICE}" DEVICE_LOWER)
-set(LINKER_DIR        ${CMAKE_CURRENT_LIST_DIR}/linker)
-set(FAMILY_LINKER_DIR ${CMAKE_SOURCE_DIR}/platforms/linker)
+set(LINKER_DIR ${CMAKE_CURRENT_LIST_DIR}/linker)
 add_link_options(${CPU_FLAGS} -Wl,--gc-sections -specs=nosys.specs
     -L${LINKER_DIR}
-    -L${FAMILY_LINKER_DIR}
     -T${LINKER_DIR}/${DEVICE_LOWER}.ld)
 
 # ── GPIO driver submodule ─────────────────────────────────────────────────────
