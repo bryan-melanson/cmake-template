@@ -2,6 +2,11 @@
   "version": 6,
   "configurePresets": [
     {
+      "name": "g0",
+      "displayName": "STM32G0 (default: G0B1xx)",
+      "inherits": "stm32g0b1"
+    },
+    {
       "name": "stm32g0b1",
       "displayName": "STM32G0B1xx",
       "generator": "Ninja",
@@ -16,6 +21,7 @@
     }
   ],
   "buildPresets": [
+    { "name": "g0",        "configurePreset": "g0" },
     { "name": "stm32g0b1", "configurePreset": "stm32g0b1" }
   ]
 }

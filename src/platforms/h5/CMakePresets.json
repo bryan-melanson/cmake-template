@@ -2,6 +2,11 @@
   "version": 6,
   "configurePresets": [
     {
+      "name": "h5",
+      "displayName": "STM32H5 (default: H563xx)",
+      "inherits": "stm32h563"
+    },
+    {
       "name": "stm32h563",
       "displayName": "STM32H563xx",
       "generator": "Ninja",
@@ -16,6 +21,7 @@
     }
   ],
   "buildPresets": [
+    { "name": "h5",        "configurePreset": "h5" },
     { "name": "stm32h563", "configurePreset": "stm32h563" }
   ]
 }
