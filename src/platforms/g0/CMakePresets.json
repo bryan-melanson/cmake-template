@@ -1,5 +1,8 @@
 {
   "version": 6,
+  "include": [
+    "../../drivers/gpio-g0b1/CMakePresets.json"
+  ],
   "configurePresets": [
     {
       "name": "g0",
@@ -15,11 +18,10 @@
     {
       "name": "stm32g0b1",
       "displayName": "STM32G0B1xx",
-      "inherits": "g0",
+      "inherits": ["g0", "gpio-g0b1"],
       "cacheVariables": {
         "PRESET_NAME": "stm32g0b1",
-        "PYOCD_TARGET": "stm32g0b1retx",
-        "GPIO_DRIVER_DIR": "${sourceDir}/src/drivers/gpio-g0b1"
+        "PYOCD_TARGET": "stm32g0b1retx"
       }
     }
   ],

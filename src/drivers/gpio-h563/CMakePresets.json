@@ -1,0 +1,12 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "gpio-h563",
+      "hidden": true,
+      "cacheVariables": {
+        "GPIO_DRIVER_DIR": "${sourceDir}/src/drivers/gpio-h563"
+      }
+    }
+  ]
+}
