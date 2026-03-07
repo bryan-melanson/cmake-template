@@ -14,11 +14,11 @@ add_link_options(${CPU_FLAGS} -Wl,--gc-sections
     -lnosys)
 
 # ── GPIO driver submodule ─────────────────────────────────────────────────────
-set(GPIO_DRIVER_DIR ${CMAKE_SOURCE_DIR}/drivers/gpio-g0b1)
+set(GPIO_DRIVER_DIR ${CMAKE_SOURCE_DIR}/src/drivers/gpio-g0b1)
 
 if(NOT EXISTS ${GPIO_DRIVER_DIR}/CMakeLists.txt)
     message(FATAL_ERROR "gpio-g0b1 driver submodule not found.\n"
-        "Run: git submodule update --init drivers/gpio-g0b1")
+        "Run: git submodule update --init src/drivers/gpio-g0b1")
 endif()
 
 add_subdirectory(${GPIO_DRIVER_DIR} gpio-g0b1)

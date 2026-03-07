@@ -14,11 +14,11 @@ add_link_options(${CPU_FLAGS} -Wl,--gc-sections
     -lnosys)
 
 # ── GPIO driver submodule ─────────────────────────────────────────────────────
-set(GPIO_DRIVER_DIR ${CMAKE_SOURCE_DIR}/drivers/gpio-h563)
+set(GPIO_DRIVER_DIR ${CMAKE_SOURCE_DIR}/src/drivers/gpio-h563)
 
 if(NOT EXISTS ${GPIO_DRIVER_DIR}/CMakeLists.txt)
     message(FATAL_ERROR "gpio-h563 driver submodule not found.\n"
-        "Run: git submodule update --init drivers/gpio-h563")
+        "Run: git submodule update --init src/drivers/gpio-h563")
 endif()
 
 add_subdirectory(${GPIO_DRIVER_DIR} gpio-h563)

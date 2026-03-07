@@ -1,7 +1,0 @@
-{
-  "version": 6,
-  "include": [
-    "platforms/g0/CMakePresets.json",
-    "platforms/h5/CMakePresets.json"
-  ]
-}
