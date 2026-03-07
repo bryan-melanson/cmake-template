@@ -18,7 +18,8 @@
       "inherits": "h5",
       "cacheVariables": {
         "PRESET_NAME": "stm32h563",
-        "PYOCD_TARGET": "stm32h563zitx"
+        "PYOCD_TARGET": "stm32h563zitx",
+        "GPIO_DRIVER_DIR": "${sourceDir}/src/drivers/gpio-h563"
       }
     }
   ],

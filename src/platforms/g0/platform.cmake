@@ -14,11 +14,13 @@ add_link_options(${CPU_FLAGS} -Wl,--gc-sections
     -T${LINKER_DIR}/chips/${DEVICE_LOWER}.ld)
 
 # ── GPIO driver submodule ─────────────────────────────────────────────────────
-set(GPIO_DRIVER_DIR ${CMAKE_SOURCE_DIR}/src/drivers/gpio-g0b1)
-
-if(NOT EXISTS ${GPIO_DRIVER_DIR}/CMakeLists.txt)
-    message(FATAL_ERROR "gpio-g0b1 driver submodule not found.\n"
-        "Run: git submodule update --init src/drivers/gpio-g0b1")
+if(NOT DEFINED GPIO_DRIVER_DIR)
+    message(FATAL_ERROR "GPIO_DRIVER_DIR is not set. Set it in your board preset.")
 endif()
 
-add_subdirectory(${GPIO_DRIVER_DIR} gpio-g0b1)
+if(NOT EXISTS ${GPIO_DRIVER_DIR}/CMakeLists.txt)
+    message(FATAL_ERROR "GPIO driver submodule not found at ${GPIO_DRIVER_DIR}.\n"
+        "Run: git submodule update --init ${GPIO_DRIVER_DIR}")
+endif()
+
+add_subdirectory(${GPIO_DRIVER_DIR} gpio-driver)

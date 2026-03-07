@@ -18,7 +18,8 @@
       "inherits": "g0",
       "cacheVariables": {
         "PRESET_NAME": "stm32g0b1",
-        "PYOCD_TARGET": "stm32g0b1retx"
+        "PYOCD_TARGET": "stm32g0b1retx",
+        "GPIO_DRIVER_DIR": "${sourceDir}/src/drivers/gpio-g0b1"
       }
     }
   ],
