@@ -11,31 +11,12 @@ add_link_options(${CPU_FLAGS} -Wl,--gc-sections -specs=nosys.specs
     -L${LINKER_DIR}
     -T${LINKER_DIR}/chips/${DEVICE_LOWER}.ld)
 
-# ── Submodule paths ───────────────────────────────────────────────────────────
-set(CUBE_DIR     ${CMAKE_SOURCE_DIR}/libs/STM32CubeH5)
-set(HAL_DIR      ${CUBE_DIR}/Drivers/STM32H5xx_HAL_Driver)
-set(CMSIS_DEV    ${CUBE_DIR}/Drivers/CMSIS/Device/ST/STM32H5xx)
-set(CMSIS_CORE   ${CUBE_DIR}/Drivers/CMSIS/Include)
-set(STARTUP_FILE ${CMSIS_DEV}/Source/Templates/gcc/startup_${DEVICE_LOWER}.s)
+# ── GPIO driver submodule ─────────────────────────────────────────────────────
+set(GPIO_DRIVER_DIR ${CMAKE_SOURCE_DIR}/libs/gpio-h5)
 
-if(NOT EXISTS ${HAL_DIR})
-    message(FATAL_ERROR "STM32CubeH5 submodule not found.\n"
-        "Run: git submodule update --init libs/STM32CubeH5")
+if(NOT EXISTS ${GPIO_DRIVER_DIR}/CMakeLists.txt)
+    message(FATAL_ERROR "gpio-h5 driver submodule not found.\n"
+        "Run: git submodule update --init libs/gpio-h5")
 endif()
 
-# ── HAL static library ────────────────────────────────────────────────────────
-file(GLOB HAL_SOURCES ${HAL_DIR}/Src/*.c)
-
-add_library(stm32_hal STATIC ${HAL_SOURCES} ${STARTUP_FILE})
-
-target_include_directories(stm32_hal PUBLIC
-    ${HAL_DIR}/Inc
-    ${CMSIS_DEV}/Include
-    ${CMSIS_CORE}
-    ${CMAKE_SOURCE_DIR}/src   # hal_conf header lives here
-)
-
-target_compile_definitions(stm32_hal PUBLIC
-    ${STM32_DEVICE}
-    USE_HAL_DRIVER
-)
+add_subdirectory(${GPIO_DRIVER_DIR} gpio-h5)

@@ -1,10 +1,8 @@
-#include "stm32_hal.h"
+#include "gpio.h"
 
 int main(void)
 {
-    HAL_Init();
-
-    /* Configure system clock here */
+    GPIO_Init();
 
     while (1)
     {

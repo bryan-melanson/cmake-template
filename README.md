@@ -1,22 +1,23 @@
 # STM32 CMake Template
 
 A minimal CMake template for STM32 projects. Selecting a preset pulls in only
-that platform's configuration and HAL submodule — other families are untouched.
+that platform's configuration and GPIO driver submodule — other families are
+untouched.
 
 ## Supported presets
 
-| Preset       | Device       | Core       | Flash  | RAM    |
-|--------------|--------------|------------|--------|--------|
-| `stm32g071`  | STM32G071xx  | Cortex-M0+ | 128 KB | 36 KB  |
-| `stm32g0b1`  | STM32G0B1xx  | Cortex-M0+ | 512 KB | 144 KB |
-| `stm32h563`  | STM32H563xx  | Cortex-M33 | 512 KB | 256 KB |
+| Preset       | Device       | Core       | Flash  | RAM    | GPIO driver      |
+|--------------|--------------|------------|--------|--------|------------------|
+| `stm32g071`  | STM32G071xx  | Cortex-M0+ | 128 KB | 36 KB  | `libs/gpio-g0`   |
+| `stm32g0b1`  | STM32G0B1xx  | Cortex-M0+ | 512 KB | 144 KB | `libs/gpio-g0`   |
+| `stm32h563`  | STM32H563xx  | Cortex-M33 | 512 KB | 256 KB | `libs/gpio-h5`   |
 
 ## Quick start
 
 ```sh
 # Pull only the submodules you need
-git submodule update --init libs/STM32CubeG0    # for G0 chips
-git submodule update --init platforms/stm32g0
+git submodule update --init libs/gpio-g0 platforms/stm32g0   # for G0
+git submodule update --init libs/gpio-h5 platforms/stm32h5   # for H5
 
 # Configure and build
 cmake --preset stm32g0b1
@@ -34,35 +35,39 @@ Output (`stm32-app.elf`, `.hex`, `.bin`) lands in `build/<preset>/src/`.
 │   ├── toolchain-arm-none-eabi.cmake
 │   └── stm32.cmake             # include(${STM32_PLATFORM_DIR}/platform.cmake)
 ├── src/
-│   ├── CMakeLists.txt
-│   ├── main.c
-│   ├── stm32g0xx_hal_conf.h
-│   └── stm32h5xx_hal_conf.h
+│   ├── CMakeLists.txt          # Links app against 'gpio' target
+│   └── main.c
 ├── platforms/                  # One submodule per STM32 family
 │   ├── stm32g0/
 │   │   ├── CMakePresets.json   # stm32g071 and stm32g0b1 presets
-│   │   ├── platform.cmake      # CPU flags, HAL library target, linker wiring
+│   │   ├── platform.cmake      # CPU flags, add_subdirectory(libs/gpio-g0), linker wiring
 │   │   └── linker/
 │   │       ├── family/g0.ld    # SECTIONS shared by all G0 chips
 │   │       └── chips/
-│   │           ├── stm32g071xx.ld   # MEMORY + INCLUDE family/g0.ld
+│   │           ├── stm32g071xx.ld
 │   │           └── stm32g0b1xx.ld
 │   └── stm32h5/
 │       ├── CMakePresets.json   # stm32h563 preset
-│       ├── platform.cmake
+│       ├── platform.cmake      # CPU flags, add_subdirectory(libs/gpio-h5), linker wiring
 │       └── linker/
 │           ├── family/h5.ld
 │           └── chips/stm32h563xx.ld
-└── libs/                       # STM32Cube HAL repos (one per family)
-    ├── STM32CubeG0/            # git submodule
-    └── STM32CubeH5/            # git submodule
+└── libs/                       # Driver repos — pull only the family you need
+    ├── gpio-g0/                # git submodule: G0 GPIO driver
+    │   ├── CMakeLists.txt      # defines 'gpio' target
+    │   ├── include/gpio.h
+    │   └── src/gpio.c
+    └── gpio-h5/                # git submodule: H5 GPIO driver
+        ├── CMakeLists.txt      # defines 'gpio' target
+        ├── include/gpio.h
+        └── src/gpio.c
 ```
 
 ## How it works
 
-### Preset → platform → chip
+### Preset → platform → driver
 
-`CMakePresets.json` simply includes the preset files from each platform submodule:
+`CMakePresets.json` includes preset files from each platform submodule:
 
 ```json
 { "version": 6, "include": ["platforms/stm32g0/CMakePresets.json", ...] }
@@ -83,14 +88,25 @@ Each platform preset sets two cache variables:
 include(${STM32_PLATFORM_DIR}/platform.cmake)
 ```
 
-`platform.cmake` sets CPU flags, builds `stm32_hal` from the correct STM32Cube
-submodule, and points to the chip-specific linker script — all using
-`CMAKE_CURRENT_LIST_DIR` so paths are self-contained within the platform repo.
+`platform.cmake` sets CPU flags, calls `add_subdirectory` on the correct GPIO
+driver, and wires up the chip linker script. The other family's driver is never
+referenced.
+
+### Driver interface
+
+Each driver exposes a `gpio` CMake target. The application links against it:
+
+```cmake
+target_link_libraries(${PROJECT_NAME} PRIVATE gpio)
+```
+
+Both driver repos share the same target name so the application `CMakeLists.txt`
+needs no conditional logic.
 
 ### Linker script overlay
 
-Each chip file defines only its `MEMORY` block and delegates the `SECTIONS`
-layout to the shared family file:
+Each chip file defines only its `MEMORY` block and delegates `SECTIONS` to the
+shared family script:
 
 ```ld
 /* stm32g0b1xx.ld */
@@ -99,8 +115,6 @@ MEMORY { FLASH (rx) : ORIGIN = 0x08000000, LENGTH = 512K
 INCLUDE family/g0.ld
 ```
 
-`-L${LINKER_DIR}` is passed at link time so the `INCLUDE` resolves correctly.
-
 ## Adding a new chip (same family)
 
 1. Add `platforms/stm32g0/linker/chips/stm32g0c1xx.ld` with the correct `MEMORY`.
@@ -108,18 +122,19 @@ INCLUDE family/g0.ld
 
 ## Adding a new family
 
-1. Create a new platform repo with `platform.cmake`, `CMakePresets.json`, and `linker/`.
-2. Add the STM32Cube repo under `libs/`.
+1. Create a platform repo with `platform.cmake`, `CMakePresets.json`, and `linker/`.
+2. Create a driver repo exposing a `gpio` target.
 3. Register both in `.gitmodules`.
-4. Add `"platforms/<family>/CMakePresets.json"` to the root `CMakePresets.json` include list.
+4. Add the platform preset file to the root `CMakePresets.json` include list.
 
-## Hosting platform repos as proper submodules
+## Hosting platform/driver repos as proper submodules
 
-The `platforms/` directories are currently tracked as regular files. To convert
-them to proper submodules once you have hosted repos:
+The `platforms/` and `libs/` directories are currently tracked as regular files.
+To convert them to proper submodules once you have hosted repos:
 
 ```sh
-git rm -r platforms/stm32g0
+git rm -r platforms/stm32g0 libs/gpio-g0
 git submodule add https://github.com/YOUR_ORG/stm32-platform-g0 platforms/stm32g0
-# update .gitmodules URL accordingly
+git submodule add https://github.com/YOUR_ORG/gpio-g0           libs/gpio-g0
+# update .gitmodules URLs accordingly
 ```

@@ -1,6 +1,6 @@
 add_executable(${PROJECT_NAME} main.c)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE stm32_hal)
+target_link_libraries(${PROJECT_NAME} PRIVATE gpio)
 
 # Print size after build
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
