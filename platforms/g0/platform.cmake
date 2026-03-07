@@ -8,9 +8,10 @@ add_compile_options(${CPU_FLAGS} -fdata-sections -ffunction-sections)
 
 string(TOLOWER "${STM32_DEVICE}" DEVICE_LOWER)
 set(LINKER_DIR ${CMAKE_CURRENT_LIST_DIR}/linker)
-add_link_options(${CPU_FLAGS} -Wl,--gc-sections -specs=nosys.specs
+add_link_options(${CPU_FLAGS} -Wl,--gc-sections
     -L${LINKER_DIR}
-    -T${LINKER_DIR}/chips/${DEVICE_LOWER}.ld)
+    -T${LINKER_DIR}/chips/${DEVICE_LOWER}.ld
+    -lnosys)
 
 # ── GPIO driver submodule ─────────────────────────────────────────────────────
 set(GPIO_DRIVER_DIR ${CMAKE_SOURCE_DIR}/drivers/gpio-g0b1)
