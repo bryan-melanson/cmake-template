@@ -1,4 +1,4 @@
-# ── STM32H5 platform ─────────────────────────────────────────────────────────
+# ── STM32H563xx platform ─────────────────────────────────────────────────────
 # Cortex-M33, FPU, TrustZone (TZ disabled here)
 
 set(CPU_FLAGS -mcpu=cortex-m33 -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=hard)
@@ -12,11 +12,11 @@ add_link_options(${CPU_FLAGS} -Wl,--gc-sections -specs=nosys.specs
     -T${LINKER_DIR}/chips/${DEVICE_LOWER}.ld)
 
 # ── GPIO driver submodule ─────────────────────────────────────────────────────
-set(GPIO_DRIVER_DIR ${CMAKE_SOURCE_DIR}/libs/gpio-h5)
+set(GPIO_DRIVER_DIR ${CMAKE_SOURCE_DIR}/drivers/gpio-h563)
 
 if(NOT EXISTS ${GPIO_DRIVER_DIR}/CMakeLists.txt)
-    message(FATAL_ERROR "gpio-h5 driver submodule not found.\n"
-        "Run: git submodule update --init libs/gpio-h5")
+    message(FATAL_ERROR "gpio-h563 driver submodule not found.\n"
+        "Run: git submodule update --init drivers/gpio-h563")
 endif()
 
-add_subdirectory(${GPIO_DRIVER_DIR} gpio-h5)
+add_subdirectory(${GPIO_DRIVER_DIR} gpio-h563)

@@ -1,21 +1,21 @@
-# ── GPIO driver libraries (pull only the family you need) ─────────────────────
-[submodule "libs/gpio-g0"]
-    path = libs/gpio-g0
-    url  = https://github.com/YOUR_ORG/gpio-g0.git
+# ── GPIO driver submodules (pull only the chip you need) ─────────────────────
+[submodule "drivers/gpio-g0b1"]
+    path = drivers/gpio-g0b1
+    url  = https://github.com/YOUR_ORG/gpio-g0b1.git
 
-[submodule "libs/gpio-h5"]
-    path = libs/gpio-h5
-    url  = https://github.com/YOUR_ORG/gpio-h5.git
+[submodule "drivers/gpio-h563"]
+    path = drivers/gpio-h563
+    url  = https://github.com/YOUR_ORG/gpio-h563.git
 
-# ── Platform configuration repos ──────────────────────────────────────────────
+# ── Platform configuration submodules ────────────────────────────────────────
 # Each platform repo contains: platform.cmake, CMakePresets.json, linker/
 # Replace URLs below with your hosted platform repos, then run:
-#   git rm -r platforms/stm32g0
-#   git submodule add <url> platforms/stm32g0
-[submodule "platforms/stm32g0"]
-    path = platforms/stm32g0
-    url  = https://github.com/YOUR_ORG/stm32-platform-g0.git
+#   git rm -r platforms/stm32g0b1
+#   git submodule add <url> platforms/stm32g0b1
+[submodule "platforms/stm32g0b1"]
+    path = platforms/stm32g0b1
+    url  = https://github.com/YOUR_ORG/stm32-platform-g0b1.git
 
-[submodule "platforms/stm32h5"]
-    path = platforms/stm32h5
-    url  = https://github.com/YOUR_ORG/stm32-platform-h5.git
+[submodule "platforms/stm32h563"]
+    path = platforms/stm32h563
+    url  = https://github.com/YOUR_ORG/stm32-platform-h563.git
