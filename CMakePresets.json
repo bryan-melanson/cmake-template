@@ -1,0 +1,37 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "stm32g0",
+      "displayName": "STM32G0 (STM32G071xx)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "toolchainFile": "${sourceDir}/cmake/toolchain-arm-none-eabi.cmake",
+      "cacheVariables": {
+        "STM32_FAMILY": "G0",
+        "STM32_DEVICE": "STM32G071xx"
+      }
+    },
+    {
+      "name": "stm32h5",
+      "displayName": "STM32H5 (STM32H563xx)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "toolchainFile": "${sourceDir}/cmake/toolchain-arm-none-eabi.cmake",
+      "cacheVariables": {
+        "STM32_FAMILY": "H5",
+        "STM32_DEVICE": "STM32H563xx"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "stm32g0",
+      "configurePreset": "stm32g0"
+    },
+    {
+      "name": "stm32h5",
+      "configurePreset": "stm32h5"
+    }
+  ]
+}

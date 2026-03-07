@@ -1,0 +1,36 @@
+# ── STM32H5 family ───────────────────────────────────────────────────────────
+# Cortex-M33, FPU, TrustZone (TZ disabled here)
+set(CPU_FLAGS -mcpu=cortex-m33 -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=hard)
+
+add_compile_options(${CPU_FLAGS} -fdata-sections -ffunction-sections)
+add_link_options(${CPU_FLAGS} -Wl,--gc-sections -specs=nosys.specs
+    -T ${CMAKE_SOURCE_DIR}/linker/stm32h563xx.ld)
+
+# ── Submodule paths ───────────────────────────────────────────────────────────
+set(CUBE_DIR     ${CMAKE_SOURCE_DIR}/libs/STM32CubeH5)
+set(HAL_DIR      ${CUBE_DIR}/Drivers/STM32H5xx_HAL_Driver)
+set(CMSIS_DEV    ${CUBE_DIR}/Drivers/CMSIS/Device/ST/STM32H5xx)
+set(CMSIS_CORE   ${CUBE_DIR}/Drivers/CMSIS/Include)
+set(STARTUP_FILE ${CMSIS_DEV}/Source/Templates/gcc/startup_stm32h563xx.s)
+
+if(NOT EXISTS ${HAL_DIR})
+    message(FATAL_ERROR "STM32CubeH5 submodule not found.\n"
+        "Run: git submodule update --init libs/STM32CubeH5")
+endif()
+
+# ── HAL static library ────────────────────────────────────────────────────────
+file(GLOB HAL_SOURCES ${HAL_DIR}/Src/*.c)
+
+add_library(stm32_hal STATIC ${HAL_SOURCES} ${STARTUP_FILE})
+
+target_include_directories(stm32_hal PUBLIC
+    ${HAL_DIR}/Inc
+    ${CMSIS_DEV}/Include
+    ${CMSIS_CORE}
+    ${CMAKE_SOURCE_DIR}/src   # hal_conf header lives here
+)
+
+target_compile_definitions(stm32_hal PUBLIC
+    ${STM32_DEVICE}
+    USE_HAL_DRIVER
+)

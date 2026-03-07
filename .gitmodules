@@ -1,0 +1,9 @@
+[submodule "libs/STM32CubeG0"]
+    path = libs/STM32CubeG0
+    url  = https://github.com/STMicroelectronics/STM32CubeG0.git
+    shallow = true
+
+[submodule "libs/STM32CubeH5"]
+    path = libs/STM32CubeH5
+    url  = https://github.com/STMicroelectronics/STM32CubeH5.git
+    shallow = true
