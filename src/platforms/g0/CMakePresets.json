@@ -23,7 +23,8 @@
         "I2C_DRIVER_DIR": null,
         "UART_DRIVER_DIR": null,
         "SPI_DRIVER_DIR": null,
-        "DMA_DRIVER_DIR": null
+        "DMA_DRIVER_DIR": null,
+        "CAN_DRIVER_DIR": null
       }
     }
   ],

@@ -14,7 +14,7 @@ add_link_options(${CPU_FLAGS} -Wl,--gc-sections
     -T${LINKER_DIR}/chips/${DEVICE_LOWER}.ld)
 
 # ── Optional driver submodules ────────────────────────────────────────────────
-foreach(_drv GPIO I2C UART SPI DMA)
+foreach(_drv GPIO I2C UART SPI DMA CAN)
     set(_dir "${_drv}_DRIVER_DIR")
     if(DEFINED ${_dir})
         if(NOT EXISTS "${${_dir}}/CMakeLists.txt")
