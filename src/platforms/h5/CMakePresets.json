@@ -1,8 +1,5 @@
 {
   "version": 6,
-  "include": [
-    "../../drivers/gpio-h563/CMakePresets.json"
-  ],
   "configurePresets": [
     {
       "name": "h5",
@@ -18,10 +15,11 @@
     {
       "name": "stm32h563",
       "displayName": "STM32H563xx",
-      "inherits": ["h5", "gpio-h563"],
+      "inherits": "h5",
       "cacheVariables": {
         "PRESET_NAME": "stm32h563",
-        "PYOCD_TARGET": "stm32h563zitx"
+        "PYOCD_TARGET": "stm32h563zitx",
+        "GPIO_DRIVER_DIR": "${sourceDir}/src/drivers/gpio-h563"
       }
     }
   ],
