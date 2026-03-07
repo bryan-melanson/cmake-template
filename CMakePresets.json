@@ -1,7 +1,7 @@
 {
   "version": 6,
   "include": [
-    "platforms/stm32g0b1/CMakePresets.json",
-    "platforms/stm32h563/CMakePresets.json"
+    "platforms/g0/CMakePresets.json",
+    "platforms/h5/CMakePresets.json"
   ]
 }

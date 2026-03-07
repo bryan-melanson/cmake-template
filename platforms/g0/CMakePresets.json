@@ -8,7 +8,7 @@
       "binaryDir": "${sourceDir}/build/${presetName}",
       "toolchainFile": "${sourceDir}/cmake/toolchain-arm-none-eabi.cmake",
       "cacheVariables": {
-        "STM32_PLATFORM_DIR": "${sourceDir}/platforms/stm32g0b1",
+        "STM32_PLATFORM_DIR": "${sourceDir}/platforms/g0",
         "STM32_DEVICE": "STM32G0B1xx",
         "PRESET_NAME": "stm32g0b1",
         "PYOCD_TARGET": "stm32g0b1retx"
