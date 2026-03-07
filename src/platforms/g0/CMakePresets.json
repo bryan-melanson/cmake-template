@@ -3,17 +3,22 @@
   "configurePresets": [
     {
       "name": "g0",
-      "displayName": "STM32G0 (default: G0B1xx)",
-      "inherits": "stm32g0b1"
-    },
-    {
-      "name": "stm32g0b1",
-      "displayName": "STM32G0B1xx",
+      "displayName": "STM32G0",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "toolchainFile": "${sourceDir}/src/cmake/toolchain-arm-none-eabi.cmake",
       "cacheVariables": {
         "STM32_PLATFORM_DIR": "${sourceDir}/src/platforms/g0",
+        "STM32_DEVICE": "STM32G0B1xx",
+        "PRESET_NAME": "g0",
+        "PYOCD_TARGET": "stm32g0b1retx"
+      }
+    },
+    {
+      "name": "stm32g0b1",
+      "displayName": "STM32G0B1xx",
+      "inherits": "g0",
+      "cacheVariables": {
         "STM32_DEVICE": "STM32G0B1xx",
         "PRESET_NAME": "stm32g0b1",
         "PYOCD_TARGET": "stm32g0b1retx"

@@ -3,17 +3,22 @@
   "configurePresets": [
     {
       "name": "h5",
-      "displayName": "STM32H5 (default: H563xx)",
-      "inherits": "stm32h563"
-    },
-    {
-      "name": "stm32h563",
-      "displayName": "STM32H563xx",
+      "displayName": "STM32H5",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "toolchainFile": "${sourceDir}/src/cmake/toolchain-arm-none-eabi.cmake",
       "cacheVariables": {
         "STM32_PLATFORM_DIR": "${sourceDir}/src/platforms/h5",
+        "STM32_DEVICE": "STM32H563xx",
+        "PRESET_NAME": "h5",
+        "PYOCD_TARGET": "stm32h563zitx"
+      }
+    },
+    {
+      "name": "stm32h563",
+      "displayName": "STM32H563xx",
+      "inherits": "h5",
+      "cacheVariables": {
         "STM32_DEVICE": "STM32H563xx",
         "PRESET_NAME": "stm32h563",
         "PYOCD_TARGET": "stm32h563zitx"
