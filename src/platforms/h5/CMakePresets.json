@@ -19,9 +19,7 @@
       "displayName": "STM32H563xx",
       "inherits": "h5",
       "cacheVariables": {
-        "STM32_DEVICE": "STM32H563xx",
-        "PRESET_NAME": "stm32h563",
-        "PYOCD_TARGET": "stm32h563zitx"
+        "PRESET_NAME": "stm32h563"
       }
     }
   ],
