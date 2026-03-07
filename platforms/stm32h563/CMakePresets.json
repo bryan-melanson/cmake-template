@@ -9,7 +9,9 @@
       "toolchainFile": "${sourceDir}/cmake/toolchain-arm-none-eabi.cmake",
       "cacheVariables": {
         "STM32_PLATFORM_DIR": "${sourceDir}/platforms/stm32h563",
-        "STM32_DEVICE": "STM32H563xx"
+        "STM32_DEVICE": "STM32H563xx",
+        "PRESET_NAME": "stm32h563",
+        "PYOCD_TARGET": "stm32h563zitx"
       }
     }
   ],

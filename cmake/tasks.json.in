@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Configure: @PRESET_NAME@",
+      "type": "shell",
+      "command": "cmake --preset @PRESET_NAME@",
+      "problemMatcher": []
+    },
+    {
+      "label": "Build: @PRESET_NAME@",
+      "type": "shell",
+      "command": "cmake --build --preset @PRESET_NAME@",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "Flash: @PRESET_NAME@",
+      "type": "shell",
+      "command": "pyocd flash -t @PYOCD_TARGET@ ${workspaceFolder}/build/@PRESET_NAME@/@PROJECT_NAME@.bin",
+      "problemMatcher": []
+    },
+    {
+      "label": "Build + Flash: @PRESET_NAME@",
+      "type": "shell",
+      "command": "cmake --build --preset @PRESET_NAME@ && pyocd flash -t @PYOCD_TARGET@ ${workspaceFolder}/build/@PRESET_NAME@/@PROJECT_NAME@.bin",
+      "group": "build",
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "Erase: @PRESET_NAME@",
+      "type": "shell",
+      "command": "pyocd erase -t @PYOCD_TARGET@ --chip",
+      "problemMatcher": []
+    }
+  ]
+}

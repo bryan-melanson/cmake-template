@@ -4,6 +4,10 @@ project(stm32-app C ASM)
 
 include(cmake/stm32.cmake)
 
+# Generate .vscode/tasks.json from the active preset
+file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/.vscode)
+configure_file(cmake/tasks.json.in ${CMAKE_SOURCE_DIR}/.vscode/tasks.json @ONLY)
+
 add_executable(${PROJECT_NAME} main.c)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE gpio)
