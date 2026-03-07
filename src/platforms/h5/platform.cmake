@@ -13,11 +13,15 @@ add_link_options(${CPU_FLAGS} -Wl,--gc-sections
     -L${LINKER_DIR}
     -T${LINKER_DIR}/chips/${DEVICE_LOWER}.ld)
 
-# ── GPIO driver submodule ─────────────────────────────────────────────────────
-if(DEFINED GPIO_DRIVER_DIR)
-    if(NOT EXISTS ${GPIO_DRIVER_DIR}/CMakeLists.txt)
-        message(FATAL_ERROR "GPIO driver submodule not found at ${GPIO_DRIVER_DIR}.\n"
-            "Run: git submodule update --init ${GPIO_DRIVER_DIR}")
+# ── Optional driver submodules ────────────────────────────────────────────────
+foreach(_drv GPIO I2C UART SPI DMA)
+    set(_dir "${_drv}_DRIVER_DIR")
+    if(DEFINED ${_dir})
+        if(NOT EXISTS "${${_dir}}/CMakeLists.txt")
+            message(FATAL_ERROR "${_drv} driver submodule not found at ${${_dir}}.\n"
+                "Run: git submodule update --init ${${_dir}}")
+        endif()
+        string(TOLOWER "${_drv}" _drv_lower)
+        add_subdirectory("${${_dir}}" "${_drv_lower}-driver")
     endif()
-    add_subdirectory(${GPIO_DRIVER_DIR} gpio-driver)
-endif()
+endforeach()
