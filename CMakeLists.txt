@@ -8,9 +8,12 @@ include(cmake/stm32.cmake)
 file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/.vscode)
 configure_file(cmake/tasks.json.in ${CMAKE_SOURCE_DIR}/.vscode/tasks.json @ONLY)
 
+# Generic drivers (platform-agnostic; depend on targets set up by stm32.cmake)
+add_subdirectory(drivers/led)
+
 add_executable(${PROJECT_NAME} main.c)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE gpio)
+target_link_libraries(${PROJECT_NAME} PRIVATE led)
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${PROJECT_NAME}>)

@@ -1,11 +1,16 @@
-#include "gpio.h"
+#include "led.h"
+
+/* Board-level pin mapping — adjust port/pin for your hardware. */
+#define LED_PORT  ((void *)0x50000400)  /* e.g. GPIOA base address */
+#define LED_PIN   5U
 
 int main(void)
 {
-    GPIO_Init();
+    LED_Handle led;
+    LED_Init(&led, LED_PORT, LED_PIN);
 
     while (1)
     {
-        /* Application loop */
+        LED_Toggle(&led);
     }
 }
