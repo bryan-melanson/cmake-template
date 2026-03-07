@@ -1,6 +1,5 @@
 /* G0 family SECTIONS — MEMORY must be defined by the chip linker script.
- * Chip scripts INCLUDE this file after their MEMORY block.
- * Link with: -L<repo>/linker -T <repo>/linker/chips/stm32g0xxx.ld       */
+ * Chip scripts INCLUDE this file after their MEMORY block.              */
 
 ENTRY(Reset_Handler)
 

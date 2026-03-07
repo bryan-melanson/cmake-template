@@ -1,9 +1,23 @@
+# ── HAL / CMSIS libraries (pull only the family you need) ────────────────────
 [submodule "libs/STM32CubeG0"]
-    path = libs/STM32CubeG0
-    url  = https://github.com/STMicroelectronics/STM32CubeG0.git
+    path    = libs/STM32CubeG0
+    url     = https://github.com/STMicroelectronics/STM32CubeG0.git
     shallow = true
 
 [submodule "libs/STM32CubeH5"]
-    path = libs/STM32CubeH5
-    url  = https://github.com/STMicroelectronics/STM32CubeH5.git
+    path    = libs/STM32CubeH5
+    url     = https://github.com/STMicroelectronics/STM32CubeH5.git
     shallow = true
+
+# ── Platform configuration repos ─────────────────────────────────────────────
+# Each platform repo contains: platform.cmake, CMakePresets.json, linker/
+# Replace the URLs below with your own hosted platform repos, then run:
+#   git rm -r platforms/stm32g0
+#   git submodule add <url> platforms/stm32g0
+[submodule "platforms/stm32g0"]
+    path = platforms/stm32g0
+    url  = https://github.com/YOUR_ORG/stm32-platform-g0.git
+
+[submodule "platforms/stm32h5"]
+    path = platforms/stm32h5
+    url  = https://github.com/YOUR_ORG/stm32-platform-h5.git

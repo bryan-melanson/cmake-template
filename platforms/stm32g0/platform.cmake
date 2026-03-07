@@ -1,14 +1,15 @@
-# ── STM32G0 family ───────────────────────────────────────────────────────────
+# ── STM32G0 platform ─────────────────────────────────────────────────────────
 # Cortex-M0+, no FPU
+
 set(CPU_FLAGS -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft)
 
 add_compile_options(${CPU_FLAGS} -fdata-sections -ffunction-sections)
 
-# -L adds the linker search path so chip scripts can INCLUDE family/g0.ld
 string(TOLOWER "${STM32_DEVICE}" DEVICE_LOWER)
+set(LINKER_DIR ${CMAKE_CURRENT_LIST_DIR}/linker)
 add_link_options(${CPU_FLAGS} -Wl,--gc-sections -specs=nosys.specs
-    -L${CMAKE_SOURCE_DIR}/linker
-    -T${CMAKE_SOURCE_DIR}/linker/chips/${DEVICE_LOWER}.ld)
+    -L${LINKER_DIR}
+    -T${LINKER_DIR}/chips/${DEVICE_LOWER}.ld)
 
 # ── Submodule paths ───────────────────────────────────────────────────────────
 set(CUBE_DIR     ${CMAKE_SOURCE_DIR}/libs/STM32CubeG0)
