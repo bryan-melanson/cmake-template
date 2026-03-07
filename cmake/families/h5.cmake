@@ -3,15 +3,19 @@
 set(CPU_FLAGS -mcpu=cortex-m33 -mthumb -mfpu=fpv5-sp-d16 -mfloat-abi=hard)
 
 add_compile_options(${CPU_FLAGS} -fdata-sections -ffunction-sections)
+
+# -L adds the linker search path so chip scripts can INCLUDE family/h5.ld
+string(TOLOWER "${STM32_DEVICE}" DEVICE_LOWER)
 add_link_options(${CPU_FLAGS} -Wl,--gc-sections -specs=nosys.specs
-    -T ${CMAKE_SOURCE_DIR}/linker/stm32h563xx.ld)
+    -L${CMAKE_SOURCE_DIR}/linker
+    -T${CMAKE_SOURCE_DIR}/linker/chips/${DEVICE_LOWER}.ld)
 
 # ── Submodule paths ───────────────────────────────────────────────────────────
 set(CUBE_DIR     ${CMAKE_SOURCE_DIR}/libs/STM32CubeH5)
 set(HAL_DIR      ${CUBE_DIR}/Drivers/STM32H5xx_HAL_Driver)
 set(CMSIS_DEV    ${CUBE_DIR}/Drivers/CMSIS/Device/ST/STM32H5xx)
 set(CMSIS_CORE   ${CUBE_DIR}/Drivers/CMSIS/Include)
-set(STARTUP_FILE ${CMSIS_DEV}/Source/Templates/gcc/startup_stm32h563xx.s)
+set(STARTUP_FILE ${CMSIS_DEV}/Source/Templates/gcc/startup_${DEVICE_LOWER}.s)
 
 if(NOT EXISTS ${HAL_DIR})
     message(FATAL_ERROR "STM32CubeH5 submodule not found.\n"

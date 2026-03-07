@@ -1,0 +1,8 @@
+/* STM32G0B1xx — 512 KB Flash, 144 KB SRAM */
+MEMORY
+{
+    FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 512K
+    RAM   (xrw) : ORIGIN = 0x20000000, LENGTH = 144K
+}
+
+INCLUDE family/g0.ld

@@ -1,0 +1,8 @@
+/* STM32H563xx — 512 KB Flash, 256 KB SRAM1 */
+MEMORY
+{
+    FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 512K
+    RAM   (xrw) : ORIGIN = 0x20000000, LENGTH = 256K
+}
+
+INCLUDE family/h5.ld
