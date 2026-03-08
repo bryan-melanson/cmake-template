@@ -12,7 +12,7 @@ add_link_options(${CPU_FLAGS} -Wl,--gc-sections
     -L${LINKER_DIR}
     -T${LINKER_DIR}/chips/${DEVICE_LOWER}.ld)
 
-# ── CMSIS device headers (register definitions only — no HAL sources built) ───
+# ── CMSIS device headers ──────────────────────────────────────────────────────
 if(DEFINED CMSIS_DIR)
     add_library(device_headers INTERFACE)
     target_include_directories(device_headers INTERFACE
