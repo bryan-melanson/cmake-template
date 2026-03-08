@@ -5,6 +5,13 @@
     "src/platforms/h5/CMakePresets.json"
   ],
   "configurePresets": [
-    { "name": "gpio", "hidden": true, "cacheVariables": { "GPIO_DRIVER_DIR": null } }
+    {
+      "name": "driver-defaults",
+      "hidden": true,
+      "cacheVariables": {
+        "CMSIS_DIR":       null,
+        "GPIO_DRIVER_DIR": null
+      }
+    }
   ]
 }

@@ -15,11 +15,10 @@
     {
       "name": "stm32h563",
       "displayName": "STM32H563xx",
-      "inherits": "h5",
+      "inherits": ["h5", "driver-defaults"],
       "cacheVariables": {
         "PRESET_NAME": "stm32h563",
-        "PYOCD_TARGET": "stm32h563zitx",
-        "CMSIS_DIR": null
+        "PYOCD_TARGET": "stm32h563zitx"
       }
     }
   ],
