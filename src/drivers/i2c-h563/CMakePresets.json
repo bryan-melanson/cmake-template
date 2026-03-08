@@ -1,0 +1,12 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "i2c-h563",
+      "hidden": true,
+      "cacheVariables": {
+        "I2C_DRIVER_DIR": "${sourceDir}/src/drivers/i2c-h563"
+      }
+    }
+  ]
+}

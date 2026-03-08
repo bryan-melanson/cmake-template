@@ -1,0 +1,12 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "uart-h563",
+      "hidden": true,
+      "cacheVariables": {
+        "UART_DRIVER_DIR": "${sourceDir}/src/drivers/uart-h563"
+      }
+    }
+  ]
+}

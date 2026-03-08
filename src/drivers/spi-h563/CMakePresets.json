@@ -1,0 +1,12 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "spi-h563",
+      "hidden": true,
+      "cacheVariables": {
+        "SPI_DRIVER_DIR": "${sourceDir}/src/drivers/spi-h563"
+      }
+    }
+  ]
+}

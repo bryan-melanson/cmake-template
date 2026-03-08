@@ -1,0 +1,12 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "crc-g0b1",
+      "hidden": true,
+      "cacheVariables": {
+        "CRC_DRIVER_DIR": "${sourceDir}/src/drivers/crc-g0b1"
+      }
+    }
+  ]
+}

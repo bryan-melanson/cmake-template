@@ -1,0 +1,12 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "can-h563",
+      "hidden": true,
+      "cacheVariables": {
+        "CAN_DRIVER_DIR": "${sourceDir}/src/drivers/can-h563"
+      }
+    }
+  ]
+}
