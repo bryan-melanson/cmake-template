@@ -5,12 +5,6 @@
     "src/platforms/h5/CMakePresets.json"
   ],
   "configurePresets": [
-    { "name": "gpio", "hidden": true, "cacheVariables": { "GPIO_DRIVER_DIR": null } },
-    { "name": "uart", "hidden": true, "cacheVariables": { "UART_DRIVER_DIR": null } },
-    { "name": "i2c",  "hidden": true, "cacheVariables": { "I2C_DRIVER_DIR":  null } },
-    { "name": "spi",  "hidden": true, "cacheVariables": { "SPI_DRIVER_DIR":  null } },
-    { "name": "dma",  "hidden": true, "cacheVariables": { "DMA_DRIVER_DIR":  null } },
-    { "name": "can",  "hidden": true, "cacheVariables": { "CAN_DRIVER_DIR":  null } },
-    { "name": "crc",  "hidden": true, "cacheVariables": { "CRC_DRIVER_DIR":  null } }
+    { "name": "gpio", "hidden": true, "cacheVariables": { "GPIO_DRIVER_DIR": null } }
   ]
 }
