@@ -22,6 +22,11 @@ if(DEFINED CMSIS_DIR)
     target_compile_definitions(device_headers INTERFACE ${STM32_DEVICE})
 endif()
 
+# ── Optional services ─────────────────────────────────────────────────────────
+if(DEFINED SHARED_MEM)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/services/shared_mem shared_mem)
+endif()
+
 # ── Optional driver submodules ────────────────────────────────────────────────
 foreach(_drv GPIO I2C UART SPI DMA CAN CRC)
     set(_dir "${_drv}_DRIVER_DIR")
