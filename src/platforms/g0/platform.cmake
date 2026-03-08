@@ -9,7 +9,6 @@ add_compile_options(${CPU_FLAGS} -fdata-sections -ffunction-sections)
 string(TOLOWER "${STM32_DEVICE}" DEVICE_LOWER)
 set(LINKER_DIR ${CMAKE_CURRENT_LIST_DIR}/linker)
 add_link_options(${CPU_FLAGS} -Wl,--gc-sections
-    -specs=nano.specs -specs=nosys.specs
     -L${LINKER_DIR}
     -T${LINKER_DIR}/chips/${DEVICE_LOWER}.ld)
 
