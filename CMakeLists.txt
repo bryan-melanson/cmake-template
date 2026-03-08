@@ -11,8 +11,8 @@ configure_file(src/cmake/tasks.json.in ${CMAKE_SOURCE_DIR}/.vscode/tasks.json @O
 # Generic drivers (platform-agnostic; depend on targets set up by stm32.cmake)
 add_subdirectory(src/drivers/led)
 
-# Modules
-add_subdirectory(src/modules/shared_mem)
+# Services
+add_subdirectory(src/services/shared_mem)
 
 add_executable(${PROJECT_NAME} src/main.c)
 
