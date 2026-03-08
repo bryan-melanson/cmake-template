@@ -10,7 +10,13 @@
       "hidden": true,
       "cacheVariables": {
         "CMSIS_DIR":       null,
-        "GPIO_DRIVER_DIR": null
+        "GPIO_DRIVER_DIR": null,
+        "UART_DRIVER_DIR": null,
+        "I2C_DRIVER_DIR":  null,
+        "SPI_DRIVER_DIR":  null,
+        "DMA_DRIVER_DIR":  null,
+        "CAN_DRIVER_DIR":  null,
+        "CRC_DRIVER_DIR":  null
       }
     }
   ]
