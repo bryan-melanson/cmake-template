@@ -15,16 +15,7 @@ SECTIONS
         _etext = .;
     } > FLASH
 
-    /* Shared memory overlay: NOLOAD so startup code never clears it.
-     * Values are preserved across soft resets while RAM power is maintained. */
-    .shared_mem (NOLOAD) :
-    {
-        . = ALIGN(4);
-        _sshared_mem = .;
-        *(.shared_mem)
-        . = ALIGN(4);
-        _eshared_mem = .;
-    } > RAM
+    INCLUDE shared_mem.ld
 
     /* Initialized data: stored in FLASH, copied to RAM at startup */
     _sidata = LOADADDR(.data);
