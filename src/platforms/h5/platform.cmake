@@ -12,6 +12,16 @@ add_link_options(${CPU_FLAGS} -Wl,--gc-sections
     -L${LINKER_DIR}
     -T${LINKER_DIR}/chips/${DEVICE_LOWER}.ld)
 
+# ── CMSIS device headers (register definitions only — no HAL sources built) ───
+if(DEFINED CMSIS_DIR)
+    add_library(device_headers INTERFACE)
+    target_include_directories(device_headers INTERFACE
+        "${CMSIS_DIR}/Include"
+        "${CMSIS_DIR}/Device/ST/STM32H5xx/Include"
+    )
+    target_compile_definitions(device_headers INTERFACE ${STM32_DEVICE})
+endif()
+
 # ── Optional driver submodules ────────────────────────────────────────────────
 foreach(_drv GPIO I2C UART SPI DMA CAN CRC)
     set(_dir "${_drv}_DRIVER_DIR")
