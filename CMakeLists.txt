@@ -11,12 +11,17 @@ configure_file(src/cmake/tasks.json.in ${CMAKE_SOURCE_DIR}/.vscode/tasks.json @O
 # Generic drivers (platform-agnostic; depend on targets set up by stm32.cmake)
 add_subdirectory(src/drivers/led)
 
-# Services
-add_subdirectory(src/services/shared_mem)
+# Services (each is opt-in)
+option(ENABLE_SHARED_MEM "Enable shared memory overlay service" OFF)
+if(ENABLE_SHARED_MEM)
+    add_subdirectory(src/services/shared_mem)
+endif()
 
 add_executable(${PROJECT_NAME} src/main.c)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE led shared_mem)
+target_link_libraries(${PROJECT_NAME} PRIVATE led
+    $<$<BOOL:${ENABLE_SHARED_MEM}>:shared_mem>
+)
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_SIZE} $<TARGET_FILE:${PROJECT_NAME}>)

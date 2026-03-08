@@ -15,8 +15,6 @@ SECTIONS
         _etext = .;
     } > FLASH
 
-    INCLUDE shared_mem.ld
-
     /* Initialized data: stored in FLASH, copied to RAM at startup */
     _sidata = LOADADDR(.data);
     .data :
