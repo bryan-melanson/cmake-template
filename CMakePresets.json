@@ -5,19 +5,12 @@
     "src/platforms/h5/CMakePresets.json"
   ],
   "configurePresets": [
-    { "name": "gpio-g0b1", "hidden": true, "cacheVariables": { "GPIO_DRIVER_DIR": "${sourceDir}/src/drivers/gpio-g0b1" } },
-    { "name": "gpio-h563", "hidden": true, "cacheVariables": { "GPIO_DRIVER_DIR": "${sourceDir}/src/drivers/gpio-h563" } },
-    { "name": "uart-g0b1", "hidden": true, "cacheVariables": { "UART_DRIVER_DIR": "${sourceDir}/src/drivers/uart-g0b1" } },
-    { "name": "uart-h563", "hidden": true, "cacheVariables": { "UART_DRIVER_DIR": "${sourceDir}/src/drivers/uart-h563" } },
-    { "name": "i2c-g0b1",  "hidden": true, "cacheVariables": { "I2C_DRIVER_DIR":  "${sourceDir}/src/drivers/i2c-g0b1"  } },
-    { "name": "i2c-h563",  "hidden": true, "cacheVariables": { "I2C_DRIVER_DIR":  "${sourceDir}/src/drivers/i2c-h563"  } },
-    { "name": "spi-g0b1",  "hidden": true, "cacheVariables": { "SPI_DRIVER_DIR":  "${sourceDir}/src/drivers/spi-g0b1"  } },
-    { "name": "spi-h563",  "hidden": true, "cacheVariables": { "SPI_DRIVER_DIR":  "${sourceDir}/src/drivers/spi-h563"  } },
-    { "name": "dma-g0b1",  "hidden": true, "cacheVariables": { "DMA_DRIVER_DIR":  "${sourceDir}/src/drivers/dma-g0b1"  } },
-    { "name": "dma-h563",  "hidden": true, "cacheVariables": { "DMA_DRIVER_DIR":  "${sourceDir}/src/drivers/dma-h563"  } },
-    { "name": "can-g0b1",  "hidden": true, "cacheVariables": { "CAN_DRIVER_DIR":  "${sourceDir}/src/drivers/can-g0b1"  } },
-    { "name": "can-h563",  "hidden": true, "cacheVariables": { "CAN_DRIVER_DIR":  "${sourceDir}/src/drivers/can-h563"  } },
-    { "name": "crc-g0b1",  "hidden": true, "cacheVariables": { "CRC_DRIVER_DIR":  "${sourceDir}/src/drivers/crc-g0b1"  } },
-    { "name": "crc-h563",  "hidden": true, "cacheVariables": { "CRC_DRIVER_DIR":  "${sourceDir}/src/drivers/crc-h563"  } }
+    { "name": "gpio", "hidden": true, "cacheVariables": { "GPIO_DRIVER_DIR": null } },
+    { "name": "uart", "hidden": true, "cacheVariables": { "UART_DRIVER_DIR": null } },
+    { "name": "i2c",  "hidden": true, "cacheVariables": { "I2C_DRIVER_DIR":  null } },
+    { "name": "spi",  "hidden": true, "cacheVariables": { "SPI_DRIVER_DIR":  null } },
+    { "name": "dma",  "hidden": true, "cacheVariables": { "DMA_DRIVER_DIR":  null } },
+    { "name": "can",  "hidden": true, "cacheVariables": { "CAN_DRIVER_DIR":  null } },
+    { "name": "crc",  "hidden": true, "cacheVariables": { "CRC_DRIVER_DIR":  null } }
   ]
 }

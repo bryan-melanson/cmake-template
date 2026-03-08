@@ -55,14 +55,14 @@ Output (`stm32-app.elf`, `.hex`, `.bin`) lands in `build/stm32g0b1/`.
 ## How it works
 
 `CMakePresets.json` at the root includes each platform's preset file and
-defines hidden driver-dir presets for every peripheral/chip combination:
+defines a hidden driver-dir preset for each peripheral type:
 
 ```json
 {
   "include": ["src/platforms/g0/CMakePresets.json", ...],
   "configurePresets": [
-    { "name": "gpio-g0b1", "hidden": true,
-      "cacheVariables": { "GPIO_DRIVER_DIR": "${sourceDir}/src/drivers/gpio-g0b1" } },
+    { "name": "gpio", "hidden": true, "cacheVariables": { "GPIO_DRIVER_DIR": null } },
+    { "name": "uart", "hidden": true, "cacheVariables": { "UART_DRIVER_DIR": null } },
     ...
   ]
 }
@@ -136,8 +136,8 @@ INCLUDE family/g0.ld
    - `src/<peripheral>.c` — implementation
 2. Add a hidden preset to the root `CMakePresets.json`:
    ```json
-   { "name": "<peripheral>-<chip>", "hidden": true,
-     "cacheVariables": { "<PERIPHERAL>_DRIVER_DIR": "${sourceDir}/src/drivers/<peripheral>-<chip>" } }
+   { "name": "<peripheral>", "hidden": true,
+     "cacheVariables": { "<PERIPHERAL>_DRIVER_DIR": null } }
    ```
 3. Add `<PERIPHERAL>_DRIVER_DIR: null` to the chip preset's `cacheVariables`.
 4. Add `"<PERIPHERAL>"` to the `foreach` loop in `platform.cmake`.
