@@ -10,6 +10,7 @@
       "hidden": true,
       "cacheVariables": {
         "CMSIS_DIR":       null,
+        "SHARED_MEM":      null,
         "GPIO_DRIVER_DIR": null,
         "UART_DRIVER_DIR": null,
         "I2C_DRIVER_DIR":  null,
