@@ -24,28 +24,14 @@
       "name": "g0-drivers",
       "hidden": true,
       "cacheVariables": {
-        "CMSIS_DIR":       "${sourceDir}/src/drivers/cmsis",
-        "GPIO_DRIVER_DIR": "${sourceDir}/src/drivers/gpio-g0b1",
-        "UART_DRIVER_DIR": "${sourceDir}/src/drivers/uart-g0b1",
-        "I2C_DRIVER_DIR":  "${sourceDir}/src/drivers/i2c-g0b1",
-        "SPI_DRIVER_DIR":  "${sourceDir}/src/drivers/spi-g0b1",
-        "DMA_DRIVER_DIR":  "${sourceDir}/src/drivers/dma-g0b1",
-        "CAN_DRIVER_DIR":  "${sourceDir}/src/drivers/can-g0b1",
-        "CRC_DRIVER_DIR":  "${sourceDir}/src/drivers/crc-g0b1"
+        "CMSIS_DIR": "${sourceDir}/src/drivers/cmsis"
       }
     },
     {
       "name": "h5-drivers",
       "hidden": true,
       "cacheVariables": {
-        "CMSIS_DIR":       "${sourceDir}/src/drivers/cmsis",
-        "GPIO_DRIVER_DIR": "${sourceDir}/src/drivers/gpio-h563",
-        "UART_DRIVER_DIR": "${sourceDir}/src/drivers/uart-h563",
-        "I2C_DRIVER_DIR":  "${sourceDir}/src/drivers/i2c-h563",
-        "SPI_DRIVER_DIR":  "${sourceDir}/src/drivers/spi-h563",
-        "DMA_DRIVER_DIR":  "${sourceDir}/src/drivers/dma-h563",
-        "CAN_DRIVER_DIR":  "${sourceDir}/src/drivers/can-h563",
-        "CRC_DRIVER_DIR":  "${sourceDir}/src/drivers/crc-h563"
+        "CMSIS_DIR": "${sourceDir}/src/drivers/cmsis"
       }
     }
   ]
