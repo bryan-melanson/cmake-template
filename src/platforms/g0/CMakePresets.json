@@ -15,7 +15,7 @@
     {
       "name": "stm32g0b1",
       "displayName": "STM32G0B1xx",
-      "inherits": ["g0", "driver-defaults"],
+      "inherits": ["g0", "driver-defaults", "g0-drivers"],
       "cacheVariables": {
         "PRESET_NAME": "stm32g0b1",
         "PYOCD_TARGET": "stm32g0b1retx"

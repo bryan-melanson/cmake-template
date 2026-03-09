@@ -15,7 +15,7 @@
     {
       "name": "stm32h563",
       "displayName": "STM32H563xx",
-      "inherits": ["h5", "driver-defaults"],
+      "inherits": ["h5", "driver-defaults", "h5-drivers"],
       "cacheVariables": {
         "PRESET_NAME": "stm32h563",
         "PYOCD_TARGET": "stm32h563zitx"
